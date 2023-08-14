@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/bargain.css">
+    <title>할인 가격 계산</title>
+</head>
+<body>
+    <div id="contents">
+        <img src="./images/sale.png" alt="">
+        <ul>
+            <li>
+                <label for="Price">원래가격</label>
+                <input type="text" id="Price">
+            </li>
+
+            <li>
+                <label for="rate">할인율</label>
+                <input type="text" id="rate">
+            </li>
+            <li>
+                <button onclick="showPrice()">할인가격 계산하기</button>
+            </li>
+        </ul>
+        <div id="showResult"></div>
+    </div>
+    <script>
+        function showPrice(){
+            let price = document.getElementById("Price").value;
+            let rate = document.getElementById("rate").value;
+            let savePrice = price * (rate/100); // 할인 금액
+            let resultPrice = price - savePrice; // 원가격에서 할인금액 뺀 최종가격       
+            document.getElementById("showResult").innerHTML = 
+            `상품의 원래 가격은 ${price}원 이고 할인율은 ${rate}%
+            로 ${savePrice}원을 절약한 ${resultPrice}원에 살 수 있습니다.`;
+        }
+    </script>
+</body>
+</html>

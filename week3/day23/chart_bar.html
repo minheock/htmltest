@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+    <button type="button" id="btn" onclick="fn_change()">변경!</button>
+      <script>
+        function fn_random_color(){
+          let rgb1 = Math.floor(Math.random() * (255+1));
+          let rgb2 = Math.floor(Math.random() * (255+1));
+          let rgb3 = Math.floor(Math.random() * (255+1));
+          let str = `rgba(${rgb1},${rgb2},${rgb3},0.3)`;
+          return str;
+        }
+        let myColor = [];
+        for(let i = 0 ; i < 6; i++){
+          myColor.push(fn_random_color());
+        }
+        console.log(myColor);
+        const ctx = document.getElementById('myChart');
+        let configs = {
+          type: 'bar',
+          data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+              label: '# of Votes', // 데이터 설명
+              data: [16, 19, 3, 5, 2, 3], // 데이터
+              backgroundColor:myColor,
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        }
+       let myChart =  new Chart(ctx, configs);
+       function fn_change(){
+        console.log(configs);
+        
+        let random_color = [];
+        let random_data = [];
+        for(let i = 0 ; i< configs.data.datasets[0].data.length; i++){
+          let random = Math.floor(Math.random()*45); 
+          random_color.push(fn_random_color());
+          random_data.push(random);
+        }
+        console.log(random_data)
+        configs.data.datasets[0].data = random_data;
+        configs.data.datasets[0].backgroundColor = random_color;
+        myChart.update(); // 데이터 변경후 update() 함수 호출 -> 차트 데이터 변경됨.
+       }
+      </script>
+      
+</body>
+</html>

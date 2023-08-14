@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String 객체의 메소드 활용</title>
+    <script>
+        function print(msg){
+            document.write(msg + "<br>");
+        }
+    </script>
+</head>
+<body>
+    <h3>String  객체의 메소드</h3>
+    <hr>
+    <script>
+        let a = new String("Boys and Girls");
+        print("a =" +a);
+        print(a.concat("입니다."));
+        print("indexOf('찾고자 하는 문자열') :" + a.indexOf('s'));
+        print("찾고자 하는 문자열이 없으면 -1" + a.indexOf("M"));
+        print("slice(5,8) : " + a.slice(5,8));
+        print("substr(5,3) :" + a.substr(5,3));
+        let sub = a.split(" "); 
+        for(let i = 0; i< sub.length; i++){
+            print("sub["+i+"] :"+ sub[i]);
+        }
+        print("replace :" + a.replace("and", "or"));
+        print("upper :" + a.toUpperCase())
+
+
+    </script>
+</body>
+</html>

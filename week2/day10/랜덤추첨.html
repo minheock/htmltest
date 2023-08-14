@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>랜덤 추첨</title>
+    <style>
+        div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        #array-content{
+            position: absolute;
+        }
+        strong{
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>classmate</h1>
+        <h2 id="array-content" onmouseover="fn_stop()" onmouseout="fn_move()"></h2>
+        <button id="stop" onclick="fn_random()">랜덤 선택</button>
+        <h2 id="result"></h2>
+        </div>
+    <script>
+        
+
+        let classmate = ["김규영", "김동현", "김상준", "김성운", "김세준", "노윤기", "박근혜", "사원기", "송현지", "신가희", "예준서", "윤가영", "윤서준",
+            "이규환", "이상희", "이영규", "이재우", "이호제", "임지윤", "정민형", "조하은", "최민혁", "최성웅"];
+        document.getElementById("array-content").innerHTML = '|' + classmate.join('|')+'|';
+            
+            function moveInterVal(){
+                let obj = document.getElementById("array-content")
+            let text = obj.innerText
+                last = text.substr(1);
+                first = text.substr(0,1);
+                obj.innerText = last + first
+            }
+            let move = setInterval(moveInterVal, 200)
+            function fn_stop(){
+                clearInterval(move)
+            }
+            function fn_move(){
+                move = setInterval(moveInterVal, 200)
+            }
+            function fn_random(){
+                fn_stop();
+                let obj = document.getElementById("array-content");
+                let text = obj.innerText
+                let mate = classmate[parseInt(Math.random()*23)] 
+                let ran =  text.indexOf(mate);
+                obj.onmouseover = null;
+                obj.onmouseout = null;
+                let first = text.slice(0, ran)
+                let last = text.slice(ran +3)
+                obj.innerHTML =`${first}<strong>${mate}</strong>${last}`;
+                document.getElementById("result").innerHTML ="당첨자:" + mate;
+            }
+            
+    </script>
+</body>
+
+</html>

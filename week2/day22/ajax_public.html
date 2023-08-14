@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script>
+        // var xhr = new XMLHttpRequest();
+        // var url = 'http://apis.data.go.kr/6300000/pis/parkinglotIF'; /*URL*/
+        // var queryParams = '?' + encodeURIComponent('serviceKey') + '='+'서비스키'; /*Service Key*/
+        // queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('3'); /**/
+        // queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /**/
+        // xhr.open('GET', url + queryParams);
+        // xhr.onreadystatechange = function () {
+        //     if (this.readyState == 4) {
+        //         alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
+        //     }       
+        // };
+        // xhr.send('');
+        let api_url ="http://apis.data.go.kr/6300000/pis/parkinglotIF"
+        let api_key = "VLbwpZ0RNojCCq2wVQMsY/GeopevUS4z4kYvc+p7xR5OZIdBdOgq/HBu627AMQPb3EF0WPRnissdo79JerenPw=="
+        $(document).ready(function(){
+            $('#btn').click(function(){
+                let rows = $('#rows').val()
+                let page = $('#page').val()
+                $.ajax({
+                    url : api_url,
+                    type : "GET",
+                    dataType:'xml',
+                    data : {
+                        serviceKey : api_key,
+                        numOfRows : rows,
+                        pageNo : page
+                    },success : function(res){
+                        console.log(res);
+                        let cnt = $(res).find('totalCount').text();
+                        console.log(cnt);
+                        $(res).find("item").each(function(){
+                            let item = $(this);
+                            let nm = item.find("name").text();
+                            let lat = item.find("lat").text();
+                            let lon = item.find("lon").text();
+                            let addr = item.find("address").text();
+                            console.log(nm, lat, lon, addr);
+                        })
+                    },error(e){
+                        alert(e)
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+    <input type="text" id="rows" value="3">
+    <input type="text" id="page" value="1">
+    <button type="button" id="btn">버튼</button>
+</body>
+</html>

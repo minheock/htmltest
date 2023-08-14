@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/nameList.css">
+</head>
+<body>
+    <div id="container"></div>
+    <h1>참가 신청서</h1>
+    <form id="myForm">
+        <input type="text" id="userName" placeholder="이름을 입력하세요" required>
+        <button type="button" onclick="fn_register()">신청</button>
+    </form>
+    <span class="del" onclick="btn_del()">x</span>
+    <hr>
+    <div id="nameList">
+        
+    </div>
+    <script>
+        document.getElementById("myForm").addEventListener('keypress', function(e){
+            if(e.key == 'Enter'){
+                e.preventDefault();// 디폴트 행동 취소.
+                fn_register();
+            }
+        })
+       
+        function fn_register(){
+            let userName = document.getElementById("userName");
+             // p태그 생성
+            let newP = document.createElement("p")
+            
+            // x 버튼의 속성 class 의 값을 del 하면 css가 적용됨.
+            newP.innerHTML = userName.value;
+            userName.value = ''; // input 창에 있는 값 제거
+            let nameList = document.getElementById("nameList");
+            // 하위 요소의 첫번째에 적용
+            nameList.insertBefore(newP, nameList.childNodes[0]);  
+            
+            }
+            function btn_del (){
+            let nameList = document.getElementById("nameList");
+            nameList.innerHTML = "";
+        }
+            
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for 문</title>
+</head>
+
+<body>
+    <h3>for 문으로 10px ~ 35px 크기 텍스트 출력</h3>
+    <script>
+        for(let i = 10; i<= 35; i+=5){
+            // document.write("<span ");
+            // document.write("style='font-size:" + i + "px'; color:rgb("+(i*2)+","+(i*3)+","+(i*4)+");>");
+            // document.write(i + "px");
+            // document.write("</span><br>");
+            document.write(`<span style='font-size:${i}px; color:rgb(${i*2},${i*3},${i*4})'>${i}px;</span><br>`)
+        }
+    </script>
+</body>
+</html>

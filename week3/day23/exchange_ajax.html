@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>환율정보</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script>
+        $(document).ready(function () {
+            let ex_url = "https://api.exchangerate.host/timeseries"
+            $('#btn').click(function () {
+                let s_dt = $('#s_dt').val()
+                let e_dt = $('#e_dt').val()
+                let base = $('#base').val()
+                console.log(s_dt, e_dt, base);
+                $.ajax({
+                    url: ex_url
+                    , type: 'GET'
+                    , data: {
+                          'start_date': s_dt
+                        , 'end_date': e_dt
+                        , 'base': base
+                    }
+                    , dataType: 'json'
+                    , success: function (res) {
+                        console.log(res);
+                        // 응답받은 데이터에서
+                        // 날짜를 labels_arr
+                        // KRW 금액을 data_arr 담아주세요
+                        // JPY 금액을 jpy_arr 에 담아주세요
+                        let labels_arr = [];
+                        let krw_arr = [];
+                        let jpy_arr = [];
+                        $(res.rates).each(function(i, v){
+                            console.log(v);
+                            labels_arr.push(Object.keys(v))
+                            for(i in v){
+                                krw_arr.push(v[i]['KRW'])
+                                jpy_arr.push(v[i]['JPY'])
+                            }
+                            console.log(labels_arr);
+                            console.log(krw_arr);
+                            console.log(jpy_arr);
+                        })
+                       
+                    }
+                })
+            });
+
+        })
+    </script>
+</head>
+
+<body>
+    <input type="date" name="" id="s_dt">
+    <input type="date" name="" id="e_dt">
+    <select name="" id="base">
+        <option value="USD" selected>달러</option>
+        <option value="EUR">유로</option>
+    </select>
+    <button id="btn">환율조회</button>
+    <h3>환율 그래프</h3>
+    <div>
+        <canvas id="myCanvas" width="1000" height="400"></canvas>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<style>
+		body{
+			margin: 0;
+			padding: 0;
+		}
+		.hide{
+			display: none;
+		}
+		#record{
+			position: absolute;
+			font-size: 35px;
+			margin-top: 350px;
+		}
+		.boom{
+			position: absolute;
+		}
+		.bomb{
+			margin-top: 35%;
+			margin-left: 150%;
+			height: 150px;
+			width: 150px;
+		}
+		.reload{
+			position: absolute;
+			text-align: center;
+			border: 1px solid snow;
+			padding-top: 10px;
+			width: 80px;
+			height: 30px;
+			margin-left: 500px;
+			background-color: seashell;
+		}
+		.reload:active{
+			background-color: rgb(22, 224, 33);
+			transform: translate(2%, 5%)
+		}
+	</style>
+	<meta charset="UTF-8">
+	<title> 가위바위보 </title>
+</head>
+
+<body>
+	<div id ="record">
+		<div class="win hide">축하합니다!! 이겼습니다!!</div>
+		<div class="draw hide">DRAW 비겼습니다.</div>
+		<div class="lose hide">졌습니다. 조금 더 분발하세요!</div>
+	</div>
+	<div class="boom">
+		<img class="bomb" src="images/616500.png" alt="">
+	</div>
+	<div class="reload" type="button" onclick="ad(isgame())">재시작</div>
+	<script>
+		document.write("<h1>컴퓨터 가위, 바위, 보 맞추기</h1>");
+		let game = prompt("가위, 바위, 보 중 선택하세요?", "가위");
+		console.log(game);
+		let com = Math.ceil(Math.random() * 3);
+		let user;
+		let word1 = document.querySelector(".win")
+		let word2 = document.querySelector(".draw")
+		let word3 = document.querySelector(".lose")
+		let reload = document.querySelector(".reload")
+		//랜덤함수를 활용하여 가위바위보 게임을 만들어보세요 ^^ 
+		
+		let useris = function() {
+		if (game == "가위") {
+			user = 1;
+		} else if (game == "바위") {
+			user = 2;
+		} else {
+			user = 3;
+		}
+		} 
+		useris();
+		document.write(`<img src='images/math_com_${com}.jpg'>`);
+		document.write(`<img src='images/math_user_${user}.jpg'>`);
+
+		
+		console.log("=================", word1, word2, word3)
+		let isgame = function andGame () {
+			if (com === 1 && user === 2 || com === 2 && user === 3 || com === 3 && user === 1) {
+			console.log("게임에 승리")
+			word1.classList.remove("hide")
+		} else if (com === user) {
+			console.log("비겼다")
+			word2.classList.remove("hide")
+		} else {
+			console.log("패배했다.")
+			word3.classList.remove("hide")
+		}
+		}
+		isgame();
+
+		
+		function ad (a){
+			word1.classList.add("hide")
+			word2.classList.add("hide")
+			word3.classList.add("hide")
+			let game = prompt("가위, 바위, 보 중 선택하세요?", "가위");
+			com = Math.ceil(Math.random() * 3);
+			console.log("==="+com)
+			user = Math.ceil(Math.random() * 3);
+			document.write(`<img src='images/math_com_${com}.jpg'>`);
+			document.write(`<img src='images/math_user_${user}.jpg'>`);
+			a();
+		}
+
+
+		
+
+	</script>
+
+</body>
+
+</html>

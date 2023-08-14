@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 2~9단까지 구구단 출력
+
+        for(let i = 2 ; i <= 9 ; i++){
+            document.write("<table border = '1'>");
+            document.write("<tr>");
+            document.write(i + "단" + "<br>");
+            document.write("</tr>");
+            for(let j = 1; j<= 9; j++){
+                document.write("<tr>");
+                document.write(`<td>${i} X ${j} = ${i*j}</td>`);
+                document.write("</tr>");
+                }
+            document.write("</table>");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>움직이는 볼</title>
+</head>
+<style>
+    canvas{
+        background-color: yellowgreen;
+        border: 1px solid;
+    }
+</style>
+<body>
+    <h3>움직이는 볼</h3>
+    <hr>
+    <canvas id="myCanvas" width="400px" height="300px"></canvas>
+    <script>
+        let canvas = document.getElementById("myCanvas");
+        let context = canvas.getContext('2d');
+        let dx = 5;
+        let dy = 5;
+        let y = 100;
+        let x = 100;
+        function fn_draw(){
+            context.clearRect(0,0,canvas.width, canvas.height);
+            context.beginPath();
+            context.fillStyle = 'red';
+            // 원 그리는 함수
+            context.arc(x, y, 20, 0, Math.PI * 2, true);
+            context.closePath();
+            context.fill();
+            if(x < (0 + 20) || x > (400 - 20)){
+                dx = -dx;
+            }
+            if(y < (0 +20) || y > (300 -20)){
+                dy = -dy;
+            }
+            x += dx;
+            y += dy;
+            requestAnimationFrame(fn_draw);
+            console.log("움직이는 중")
+        }
+        // setInterval(fn_draw, 20);
+        // es6 문법에서 생긴 메서드 브라우저의 그래픽 처리와 특정 작업을 
+        // 자연스럽게 동기화하도록 함. (다른 탭에 있으면 실행하지 않음) 자원 효율적 이용
+        requestAnimationFrame(fn_draw);
+    </script>
+</body>
+</html>

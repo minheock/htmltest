@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script>
+        $(document).ready(function(){
+            let apiKEY = '7f7314005c9a1bb8ee535cedbd043a27'
+            const api_url = 'http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json'
+            $('#btn').click(function(){
+                let dt = $('#st').val().replaceAll('-', '')
+                alert(dt);
+                $.ajax({
+                    url : api_url,
+                    type: 'GET',
+                    data: {key : apiKEY , targetDt:dt},
+                    dataType : 'json',
+                    success : function(res){
+                        $('#tb').empty();
+                        let dts = res['boxOfficeResult']['dailyBoxOfficeList'];
+                        $('#tb').append(`
+                        <tr>
+                            <th>순위</th>
+                            <th>대표코드</th>
+                            <th>영화명</th>
+                            <th>개봉일 </th>
+                            <th>매출액</th>
+                            <th>누적매출액</th>
+                            <th>관객수</th>
+                            <th>누적관객수</th>
+                            <th>상영된스크린수</th>
+                            <th>상영수</th>
+                        </tr>`);
+                        $(dts).each(function(i, el){
+                            console.log(el);            
+                            let str = "";
+                            str += '<tr>'
+                            str += `<td>${el.rank}</td>`
+                            str += `<td>${el.movieCd}</td>`
+                            str += `<td>${el.movieNm}</td>`
+                            str += `<td>${el.openDt}</td>`
+                            str += `<td>${el.salesAmt}</td>`
+                            str += `<td>${el.salesAcc}</td>`
+                            str += `<td>${el.audiCnt}</td>`
+                            str += `<td>${el.audiAcc}</td>`
+                            str += `<td>${el.scrnCnt}</td>`
+                            str += `<td>${el.showCnt}</td>`
+                            str += '</tr>'
+                            $('#tb').append(str);
+                        })
+                        str = "</tr></table>"
+                    },error(e){
+                        alert(e);
+                    }
+
+                })
+            })
+        })
+    </script>
+
+</head>
+<body>
+    <input type="date" name="" id="st">
+    <button id="btn">조회</button>
+    <hr>
+    <div id="str">
+        <table id="tb">   
+        </table>
+    </div>
+</body>
+</html>
+<!-- 
+rank	문자열	해당일자의 박스오피스 순위를 출력합니다.
+rankInten	문자열	전일대비 순위의 증감분을 출력합니다.
+rankOldAndNew	문자열	랭킹에 신규진입여부를 출력합니다.
+“OLD” : 기존 , “NEW” : 신규
+movieCd	문자열	영화의 대표코드를 출력합니다.
+movieNm	문자열	영화명(국문)을 출력합니다.
+openDt	문자열	영화의 개봉일을 출력합니다.
+salesAmt	문자열	해당일의 매출액을 출력합니다.
+salesShare	문자열	해당일자 상영작의 매출총액 대비 해당 영화의 매출비율을 출력합니다.
+salesInten	문자열	전일 대비 매출액 증감분을 출력합니다.
+salesChange	문자열	전일 대비 매출액 증감 비율을 출력합니다.
+salesAcc	문자열	누적매출액을 출력합니다.
+audiCnt	문자열	해당일의 관객수를 출력합니다.
+audiInten	문자열	전일 대비 관객수 증감분을 출력합니다.
+audiChange	문자열	전일 대비 관객수 증감 비율을 출력합니다.
+audiAcc	문자열	누적관객수를 출력합니다.
+scrnCnt	문자열	해당일자에 상영한 스크린수를 출력합니다.
+showCnt	문자열	해당일자에 상영된 횟수를 출력합니다. -->

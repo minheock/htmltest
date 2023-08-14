@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let dan = Math.ceil(Math.random() * 8 )+1;
+        let su = Math.ceil(Math.random() * 9 );
+        // 위에서 생성한 랜던 값으로 구구단을 프롬프트로 출력 후 정답을 입력받아 맞으면
+        // alert 맞았습니다. 틀리면 ....을 출력해 주세요
+
+        let gugudan = prompt(`${dan} x ${su} = ?`)
+        console.log(dan*su, gugudan)
+        if(dan * su === Number(gugudan)){
+            alert("맞았습니다.")
+        }else{
+            alert("..........")
+        }
+
+    </script>
+</body>
+</html>

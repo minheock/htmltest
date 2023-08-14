@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>[]로 배열 만들기</h3>
+    <hr>
+    <script>
+        let plots = [70,20, 5, 8, 15, 20];
+        console.log(typeof(plots));
+        console.log(plots.length);
+        // for문 기본형
+        for(let i = 0 ; i < plots.length; i++){
+            let size = plots[i];
+            while(size > 0){
+                document.write("*");
+                size--;
+            }
+            document.write(plots[i] + "<br>");
+
+        }
+        // for in 문 요소의 성분 수 만큼 반복
+        for(let i in plots){
+            console.log(`${i}번째 , ${plots[i]}`)
+        }
+       
+        // for of 문 요소의 값만 필요할때
+        for(let v of plots){
+            console.log(`${v}`)
+        }
+        // 다차원 배열
+        let arr = [[101,102,103],[201,202,203],[301,302,303]];
+        console.log("arr:" ,arr)
+        console.log("arr[0]:" ,arr[1])
+        console.log("arr[1][0]:" ,arr[1][0])
+
+        for(let i = 0 ; i< arr.length; i++){
+            for(let j =0 ; j< arr[i].length; j++){
+                console.log(`${i}, ${j} : ${arr[i][j]}`)
+            }
+        }
+    </script>
+</body>
+</html>

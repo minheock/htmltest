@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#btn').click(function () {
+                $("#apple").animate({ left: '100px' });
+            })
+            $('#btn').dblclick(function () {
+                $("#apple").animate({ left: '0px' });
+            })
+            $('#fadeIn').click(function () {//천천히 나타남
+                $("#apple2").slideDown('fast').fadeOut('fast').fadeIn('slow');
+            })
+            $('#fadeOut').click(function () {//빠르게 사라짐
+                $("#apple2").fadeOut('fast');
+            })
+            $('#btn2').click(function () {
+                alert($("#apple").attr('src'));
+            })
+            $('#btn3').click(function () {// 매개변수 두개주면 수정
+                $("#apple").attr('src','../../week1/img/apple3.jpg');
+            })
+            $('#btn3').dblclick(function () {// 매개변수 두개주면 수정
+                $("#apple").attr('src','../../week1/img/apple1.jpg');
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <button id="btn">animate()</button><br>
+    <button id="btn2">get attr()</button>
+    <button id="btn3">change src</button><br>
+    <img src="../../week1/img/apple1.jpg" id="apple" width="120" height="100" style="position: relative;" alt=""><br>
+    <button id="fadeIn">fadein</button>
+    <button id="fadeOut">fadeout</button><br>
+    <img src="../../week1/img/apple2.jpg" id="apple2" width="120" height="100" style="position: relative;" alt="">
+</body>
+
+</html>

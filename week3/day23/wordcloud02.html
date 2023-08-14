@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.1.0/wordcloud2.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="1000" height="800"></canvas>
+    <script>
+        let str = "JAVA JAVA JSP jsp C C HTML C JAVA JAVASCRIPT";
+        function countWords(words){
+            let counts = {};
+            let arr = words.split(' ');
+            for(let word of arr){
+                word = word.toLowerCase().trim();
+                if(word !== '' && word.length > 1){
+                    counts[word] = counts[word] ? counts[word] + 10 : 1;
+                }
+            }
+            return counts;
+        }
+        let obj = countWords(str);
+        console.log(obj);
+        let WordCloudArr = [];
+        for(let word in obj){
+            WordCloudArr.push([word, obj[word]]);
+        }
+        console.log(WordCloudArr);
+        WordCloud(document.getElementById('myCanvas'), {
+            list:WordCloudArr
+            ,backgroundColor: 'black'
+            ,fontSize : {from : 50, to: 100}
+        });
+    </script>
+</body>
+</html>

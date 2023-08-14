@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#btn1").click(function(){
+                // 앞에 (형제요소)
+                $('p').before("<span>before</span>")
+            })
+            $("#btn2").click(function(){
+                // 뒤에 (형제요소)
+                $('p').after("<span>after</span>")
+            })
+            $("#btn3").click(function(){
+                // 감싸다
+                $('p').wrap("<div style='background-color:red;'></div>")
+            })
+        })
+    </script>
+</head>
+<body>
+    <div id="content">
+        <p>I would like to say:</p>
+    </div>
+    <button id="btn1">before()</button>
+    <button id="btn2">after()</button>
+    <button id="btn3">warp()</button>
+    
+</body>
+</html>

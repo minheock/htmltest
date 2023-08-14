@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX</title>
+    <style>
+        html, body{
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        #first_table tr:nth-child(e){
+            background-color: beige;
+        }
+        table tr:hover{
+            background-color: cadetblue;
+        }
+        #left_div{
+            float: left;
+            width: 45%;
+            height: 800px;
+            overflow: scroll;
+        }
+    </style>
+    <script>
+        // AJAX Asynchronouse Javascript XML 비동기 자바스크립트 XML
+        // 초기에는 XML을 많이 사용했음 지금은 JSON으로 대체중
+        // 비동기로 하려면 통신 대행 객체가 필요한다. XMLHTTpRequest 객체가 있음
+        let detail_url = "https://api.upbit.com/v1/ticker?markets=";
+        let v_ajax = new XMLHttpRequest();
+        let v_ajax2 = new XMLHttpRequest();
+        function fn_get() {
+            v_ajax.open('GET', 'https://api.upbit.com/v1/market/all', true);
+            v_ajax.send() // 요청
+        }
+        v_ajax.onreadystatechange = function () {
+            // 통신객체로 요청 후 응답이 오면 onready... 리스너가 작동
+            if (v_ajax.readyState === 4 && v_ajax.status === 200) {
+                // 상태 4는 데이터를 받았을때, HTTP 코드 200은 정상처리 
+                let coinArr = JSON.parse(v_ajax.responseText);
+                console.log(coinArr);
+                let str = "";
+                for (let i = 0; i < 1; i++) {
+                    let first = document.getElementById("first_table");
+                    str += "<tr><td>en_name</td><td>kor_name</td><td>market</td></tr>"
+                    for (let j = 0; j < coinArr.length; j++) {
+                        str += '<tr onclick="fn_click(\''+coinArr[j].market+'\')">'
+                        str += `<td>${coinArr[j].english_name}</td>
+                        <td>${coinArr[j].korean_name}</td>
+                        <td>${coinArr[j].market}</td>`
+                        str += "</tr>"
+                        first.innerHTML = str
+                    }
+                }
+            }
+            
+        }
+        let first_tr = document.getElementsByTagName("tr");
+        function fn_click(code){
+            v_ajax2.open('GET', detail_url + code, true);
+            v_ajax2.send() // 요청
+        }
+        v_ajax2.onreadystatechange = function(){
+            // second_table에
+            // 요청 market의 상세정보를 출력하세요
+            if (v_ajax2.readyState === 4 && v_ajax2.status === 200) {
+                let marArr = JSON.parse(v_ajax2.responseText);
+                console.log(marArr)
+                let a = "";
+                for(let i = 0 ; i < marArr.length;  i++){
+                    let se = document.getElementById("second_table");
+                    console.log(i)
+                    for(k in marArr[0]){
+                        console.log(k)
+                    a += "<tr>"
+                    a += `<td>${k}</td><td>${marArr[i][k]}</td>`
+                    a += "</tr>" 
+                    }
+                    se.innerHTML = a;                  
+                }
+            }
+        }
+        
+        function fn_x() {
+            document.getElementById("first_table").innerHTML = "";;
+        }
+    </script>
+</head>
+
+<body>
+    <button type="button" onclick="fn_get()">가져오기</button>
+    <button type="button" onclick="fn_x()">지우기</button>
+    <div class="row">
+        <div id="left_div">
+            <table id="first_table"></table>
+        </div>
+        <div id="right_div">
+            <table id="second_table"></table>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>클릭하면 이미지가 바뀌는...</title>
+    <style>
+        #container {
+            width: 60%;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        img {
+            width: 60%;
+            height: 60%;
+            ;
+        }
+
+        p {
+            background-color: black;
+            color: white;
+        }
+
+        strong {
+            color: yellow;
+        }
+
+        button {
+            position: relative;
+            font-size: 50px;
+            bottom: 250px;
+        }
+    </style>
+    <script>
+        let files = ["./img/1.PNG", "./img/2.PNG", "./img/3.PNG","./img/4.PNG"]
+        let idx = 0;
+        let imgs = [];
+        for(let i = 0 ; i < files.length; i++){
+            imgs[i] = new Image();
+            imgs[i].src = files[i];
+        }
+        let next = 0;
+        window.onload = function(){
+            obj = document.getElementById("img_id");
+        }
+        function fn_left() {
+            // 작아지게 (0까지 작아졌다면 이미지의 마지막 인덱스로)
+            obj = document.getElementById("img_id");
+            console.log(obj.src)
+            console.log(imgs[0].src)
+            if(idx < 1){
+                idx = imgs.length-1;
+            }else{
+                idx--;
+            }
+
+            obj.src = imgs[idx].src
+         
+        }
+        function fn_right() {
+            // 커지게 (이미지의 최대 수량까지 증가해싿면 -> 0으로)
+            obj = document.getElementById("img_id");
+            if(idx == imgs.length-1){
+                idx = 0
+            }else{
+                idx++;
+            }
+            obj.src = imgs[idx].src
+        }
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        <h1></h1>
+        <p>가장 위험한 작전, 그의 마지막 선택 모든 인류를 위협할 새로운 <strong>무기를</strong> 추적하게 된 에단 헌트(톰 크루즈)와 IMF팀은 이 무기가 인류의 미래를 통제할 수 있다는
+            사실을 알게 된다. 전 세계가
+            위태로운 상황에 처한 가운데, 이를 추적하던 <strong>에단 헌트</strong>에게 어둠의 세력까지 접근하고 마침내 미스터리하고 강력한 빌런과 마주하게 된 그는 가장 위험한 작전을 앞두고
+            자신이 아끼는 사람들의 생명과
+            중요한 임무 사이에서 선택을 해야 하는 상황에 놓이게 되는데…</p>
+        <p>미국정부로부터 해체 통보를 받게 된 최첨단 첩보기관 IMF(Impossible Mission Force). ‘에단 헌트(톰 크루즈)’를 포함한 팀원들은 모두 뿔뿔이 흩어지게 되고, 정체불명의
+            테러조직 ‘신디케이트’는 IMF 전멸 작전을 펼친다. 신디케이트에게 납치 당한 ‘에단 헌트’는 의문의 여인 ‘일사(레베카 퍼거슨)’의 도움을 받아 극적 탈출에 성공하고 다시 팀원들을 불러
+            모은다. 리더 ‘에단 헌트’부터 전략 분석요원 ‘브랜트(제레미 레너)’, IT 전문요원 ‘벤지(사이먼 페그)’, 해킹 전문요원 ‘루터(빙 라메스)’ 그리고 정체를 알 수 없는 ‘일사’까지. 다시
+            모인 그들은 역대 가장 위협적인 적 신디케이트에 맞서는 불가능한 미션을 펼친다!</p>
+        <div>
+            <button id="left" onclick="fn_left()">&lt;</button>
+            <img src="./img/2.PNG" id="img_id" alt="">
+            <button id="right" onclick="fn_right()">&gt;</button>
+        </div>
+    </div>
+</body>
+
+</html>

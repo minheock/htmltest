@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#sel').change(function(){
+                alert($(this).val());
+            });
+            let chkArr = $('input[name=chk]');
+            console.log(chkArr);
+            $('#btn').click(function(){
+                // jquery $.each(arr, function(i, v){})
+                let str = "";
+                $.each(chkArr, function(i,v){
+                    //.is 상태체크
+                    if($(v).is(':checked')){
+                        console.log(i, v);
+                        // checked 가 true 인 checkbox의 value
+                        str += $(v).val() + " "; 
+                    }
+                });
+                alert("check : "+ str);
+            });
+            $('#all').click(function(){
+                if($(this).is(":checked")){
+                    // prop property 변경시 사용
+                    chkArr.prop('checked', true);
+                }else{
+                    chkArr.prop('checked', false);
+                }
+            })
+        });
+    </script>
+</head>
+<body>
+    <select name="" id="sel">
+        <option value="">선택하시오</option>
+        <option value="레몬 아이스티">1</option>
+        <option value="복숭아 아이스티">2</option>
+        <option value="자몽 아이스티">3</option>
+        <option value="석류 아이스티">4</option>
+    </select>
+    <div>
+        <input type="checkbox" name="" id="all">전체선택 <br>
+        <input type="checkbox" name="chk" value="1">선택1
+        <input type="checkbox" name="chk" value="2">선택1
+        <input type="checkbox" name="chk" value="3">선택1
+        <button id="btn">선택값 가져오기</button>
+
+    </div>
+</body>
+</html>

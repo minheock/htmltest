@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script>
+        const API_KEY = 'VLbwpZ0RNojCCq2wVQMsY/GeopevUS4z4kYvc+p7xR5OZIdBdOgq/HBu627AMQPb3EF0WPRnissdo79JerenPw=='
+        const API_URL = 'http://apis.data.go.kr/6300000/GetSchoListService/getSchoList'
+
+        $(document).ready(function(){
+            let rows = $('#rows').val()
+            let page = $('#page').val()
+            let a = $('#fclty').val();
+            let b = $('#trget').val();
+            let c = $('#rdn').val();
+            let d = $('#lnma').val();
+            let e = $('#long').val();
+            let f = $('#is_cctv').val();
+            let g = $('#cctv_num').val();
+            let h = $('#latite').val();
+            let i = $('#reference').val();
+            $.ajax({
+                url : API_URL,
+                type : "GET",
+                data :{
+                    serviceKey:API_KEY,
+                    LATITUDE: h,
+                    type:'xml',
+                    LONGITUDE:e,
+                    REFERENCEDATE:i,
+                    numOfRows:rows,
+                    pageNo:page,
+                    TRGET_FCLTY_NM:b,
+                    CCTV_YN	:f,
+                    CCTV_NUMBER:g,
+                    FCLTY_KND:a,
+                    RDNMADR:c,
+                    LNMADR:d
+                },success : function(res){
+                    console.log(res);
+                },error(e){
+                    console.log(e);
+                }
+            })
+        })
+
+        //https://apis.data.go.kr/6300000/GetSchoListService/getSchoList?serviceKey=VLbwpZ0RNojCCq2wVQMsY%2FGeopevUS4z4kYvc%2Bp7xR5OZIdBdOgq%2FHBu627AMQPb3EF0WPRnissdo79JerenPw%3D%3D&numOfRows=10&pageNo=1&type=xml&FCLTY_KND=%EC%B4%88%EB%93%B1%ED%95%99%EA%B5%90&TRGET_FCLTY_NM=%EB%8C%80%EC%A0%84%EC%86%A1%EA%B0%95%EC%B4%88%EA%B5%90&RDNMADR=%EB%8C%80%EC%A0%84%20%EC%9C%A0%EC%84%B1%EA%B5%AC%20%EC%86%A1%EA%B0%95%EB%A1%9C42%EB%B2%88%EA%B8%B8%206&LATITUDE=36.4325440509&LONGITUDE=127.384228348&CCTV_YN=Y&CCTV_NUMBER=7&REFERENCEDATE=2022-12-10
+       // http://apis.data.go.kr/6300000/GetSchoListService?serviceKey=VLbwpZ0RNojCCq2wVQMsY%2FGeopevUS4z4kYvc%2Bp7xR5OZIdBdOgq%2FHBu627AMQPb3EF0WPRnissdo79JerenPw%3D%3D&type=xml&LONGITUDE=&REFERENCEDATE=&numOfRows=3&pageNo=1&TRGET_FCLTY_NM=&CCTV_YN=&CCTV_NUMBER=&FCLTY_KND=&RDNMADR=&LNMADR=
+ </script>
+</head>
+<body>
+    <items>
+        <item>
+        <FCLTY_KND id="fclty"></FCLTY_KND>
+        <TRGET_FCLTY_NM id="trget"></TRGET_FCLTY_NM>
+        <RDNMADR id ="rdn"></RDNMADR>
+        <LNMADR id="lnma"/>
+        <LATITUDE id="latit"></LATITUDE>
+        <LONGITUDE id="long"></LONGITUDE>
+        <CCTV_YN id="is_cctv"></CCTV_YN>
+        <CCTV_NUMBER id="cctv_num"></CCTV_NUMBER>
+        <REFERENCEDATE id="reference"></REFERENCEDATE>
+        </item>
+        </items>
+    <input type="text" id="rows" value="3">
+    <input type="text" id="page" value="1">
+    <button type="button" id="btn">버튼</button>
+</body>
+</html>

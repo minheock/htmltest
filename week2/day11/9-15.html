@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>new Image()로 이미지 로딩</title>
+    <script>
+        // 미리 로딩해둘 이밎
+        let files = ["./1.png","./2.png","./3.png","./4.png",
+        "./5.png","./6.png","./7.png","./8.png"]
+        let imgs = [];
+        for(let i = 0 ; i < files.length; i++){
+            imgs[i] = new Image();
+            imgs[i].src = files[i];
+        }
+        let next = 1;
+        function fn_change(obj){
+            obj.src = imgs[next].src // 이미지 변경
+            next++;
+            next %= imgs.length; // 이미지 갯수를 넘으면 첨으로
+        }
+    </script>
+</head>
+<body>
+    <h3>new Image() 로 이미지 로딩</h3>
+    <hr>
+    <img src="./1.PNG" style="border: 20px ridge wheat;" width="200px" height="300px" onclick="fn_change(this)" alt="">
+</body>
+</html>

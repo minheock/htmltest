@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>다양한 선택자</title>
+</head>
+<style>
+    /* 태그 이름 선택자*/
+    h3, li{ color: blue;}
+    /* 자식 선택자*/
+    div > div > strong{background-color: yellow;}
+    /* 자손  선택자*/
+    ul strong {color: aqua;}
+    /* 클래스 선택자*/
+    .warning {color: blueviolet;}
+
+    .main{background-color: aliceblue;}
+    /* id */
+    #list {background-color: antiquewhite;}
+    /* id 자손 선택자 */
+    #list span {color: greenyellow;}
+    /* 가상 선택자 */
+    h3::first-letter{color: red;}
+    li:hover{background-color: black;}
+    li:active{background-color: gray;}
+</style>
+
+<body class="main">
+    <div>
+    <h3>Web Programming</h3>
+    <hr>
+    <div> 2학기 <strong>학습내용</strong></div>
+    <ul id="list">
+        <li><span>HTML5</span></li>
+        <li><strong>CSS</strong></li>
+        <li>JavaScript</li>
+    </ul>
+    <div class="warning">60점 이하는 F</div>
+</div>
+</body>
+
+</html>

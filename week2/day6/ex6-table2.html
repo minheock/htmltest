@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테이블 만들기</title>
+</head>
+<body>
+    <script>
+        let row = prompt("몇 행?");
+        let col = prompt("몇 열?");
+        document.write("<table border = '1'>")
+
+            for(let i = 1; i <= row; i++){
+            document.write("<tr>")
+            for(let j = 1 ; j <= col; j++){
+            document.write("<td>"+ i + "행" + j + "열</td>")
+            }
+            document.write("</tr>")
+        }
+
+        document.write("</table>")
+    </script>
+</body>
+</html>
