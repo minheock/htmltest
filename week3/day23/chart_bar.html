@@ -11,6 +11,8 @@
         <canvas id="myChart"></canvas>
     </div>
     <button type="button" id="btn" onclick="fn_change()">변경!</button>
+    <button type="button" id="btn" onclick="fn_wordlaser()">지우기</button>
+    <div id="chartval"></div>
       <script>
         function fn_random_color(){
           let rgb1 = Math.floor(Math.random() * (255+1));
@@ -47,7 +49,7 @@
        let myChart =  new Chart(ctx, configs);
        function fn_change(){
         console.log(configs);
-        
+        let ctv = document.getElementById('chartval');
         let random_color = [];
         let random_data = [];
         for(let i = 0 ; i< configs.data.datasets[0].data.length; i++){
@@ -55,11 +57,26 @@
           random_color.push(fn_random_color());
           random_data.push(random);
         }
-        console.log(random_data)
+        console.log(ctv);
         configs.data.datasets[0].data = random_data;
         configs.data.datasets[0].backgroundColor = random_color;
         myChart.update(); // 데이터 변경후 update() 함수 호출 -> 차트 데이터 변경됨.
+
+        for(let j = 0; j < 1; j++){
+        for(let i = 0 ; i < configs.data.labels.length; i++){
+          ctv.innerHTML += `<tr>${configs.data.labels[i]} : ${random_data[i]}</tr><br>`
+         }
+        }
        }
+      
+
+       function fn_wordlaser(){
+        let ctv = document.getElementById('chartval');
+        console.log(ctv.innerHTML);
+        ctv.innerHTML = "";
+       }
+
+
       </script>
       
 </body>
