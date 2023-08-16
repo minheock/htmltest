@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>line chart</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        $(document).ready(function () {
+            let ctx = document.getElementById('myChart')
+            let labels_arr = [];
+            let krw_arr = [];
+            let jpy_arr = [];
+            let configs = {
+                type: 'line'
+                , data: {
+                    labels: labels_arr
+                    , datasets: [
+                        {
+                            label: 'KRW'
+                            , data: krw_arr
+                        }
+                        , {
+                            label: 'JPY'
+                            , data: jpy_arr
+                        }
+
+                    ]
+                }, options: {
+                    elements: {
+                        line: {
+                            tension: 0.1 //수치가 클수록 부드럽게 그려줌
+                        }
+                    }
+                }
+            };
+            let myChart = new Chart(ctx, configs)
+            $('#btn').click(function () {
+                let ex_url = "https://api.exchangerate.host/timeseries"
+                let s_dt = $('#s_dt').val()
+                let e_dt = $('#e_dt').val()
+                let base = $('#base').val()
+                $.ajax({
+                    url: ex_url
+                    , type: 'GET'
+                    , data: {
+                        'start_date': s_dt
+                        , 'end_date': e_dt
+                        , 'base': base
+                    }
+                    , dataType: 'json'
+                    , success: function (res) {
+                        console.log(res);
+                        let obj = res.rates;
+                        // $(res.rates).each(function (i, obj) {
+                        //     labels_arr.push(Object.keys(obj))
+                        //     for (i in obj) {
+                        //         krw_arr.push(obj[i]['KRW'])
+                        //         jpy_arr.push(obj[i]['JPY'])
+                        //     }                           
+                        // });
+                        for(i in obj){
+                            labels_arr.push(i)
+                            krw_arr.push(obj[i]['KRW'])
+                            jpy_arr.push(obj[i]['JPY'])
+                        }
+                        configs.data.labels = labels_arr;
+                        configs.data.datasets[0].data = krw_arr;
+                        configs.data.datasets[1].data = jpy_arr;
+                        console.log(configs);
+
+                        myChart.update();
+                        
+                    }
+                })
+            });
+        })
+    </script>
+</head>
+
+<body>
+    <input type="date" name="" id="s_dt">
+    <input type="date" name="" id="e_dt">
+    <select name="" id="base">
+        <option value="USD" selected>달러</option>
+        <option value="EUR">유로</option>
+    </select>
+    <button id="btn">환율조회</button>
+    <h3>한국 환율 추세 (라인차트)</h3>
+    <div style="width: 700px; height: 400px;">
+        <canvas id="myChart" width="600px" height="300px"></canvas>
+    </div>
+</body>
+
+</html>
