@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script>
+        $(document).ready(function(){                   
+            $('#btn').click(function(){
+                let qString = document.getElementById("qString").value;
+                $.ajax({
+                    url:"http://127.0.0.1:8090/servlet02/users"
+                    ,data:{"q":`${qString}`}
+                    ,type:"get"
+                    ,success:function(res){
+                        console.log(res.items[0]);
+                        console.log(res.items[0].title);
+                        let inner = document.getElementById("qText");    
+                        let qval = res.items[0];              
+                        for(let i in qval ){
+                            inner.innerHTML += `<div>${qval[i]}</div><br>`
+                        }                                              
+                    },error:function(e){
+                        console.log(e);
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+    <input type="text" id="qString" value="" placeholder="검색어를 입력하세요">
+    <button id="btn" type="button">get 요청</button>
+    <div id="qText" style="width: 500px; height: 1000px; border: 1px dotted black;">-  내 맛집 리스트  -</div>
+</body>
+</html>

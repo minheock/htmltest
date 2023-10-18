@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>텍스트 에디터 연습</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="../smarteditor2-2.8.2.3/js/HuskyEZCreator.js"></script>
+    <script>
+      var oEditors = [];
+      $(document).ready(function(){
+            nhn.husky.EZCreator.createInIFrame({
+                oAppRef: oEditors,
+                elPlaceHolder: "bo_content",
+                sSkinURI: "../smarteditor2-2.8.2.3/SmartEditor2Skin.html",
+                htParams: {
+        
+                    bUseToolbar: true,              // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+                    bUseVerticalResizer: true,      // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+                    bUseModeChanger: true,          // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+                    bSkipXssFilter: true,       // client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
+                    //aAdditionalFontList : aAdditionalFontSet,     // 추가 글꼴 목록
+                    fOnBeforeUnload: function () {
+                        //alert("완료!");
+                    }
+
+                }, //boolean
+                fOnAppLoad: function () {
+                    //예제 코드
+                    //oEditors.getById["ir1"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+                },
+                fCreator: "createSEditor2"
+            });
+        })
+    </script>
+</head>
+<body>
+    <section class="page-section" id="contact">
+        <div class="container" style="margin-top:100px">
+        <form action="" method="post">
+            <table style="width: 1500px;">
+                <tr>
+                    <th>제목</th>
+                    <td><input type="text" name="boTitle"></td>
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td><textarea type="text" name="boContent" id="bo_content"></textarea></td>
+                </tr>
+            </table>
+        </form>
+        </div>
+
+    </section>
+</body>
+</html>

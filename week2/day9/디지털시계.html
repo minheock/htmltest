@@ -7,6 +7,21 @@
     <link rel="stylesheet" href="./css/time.css">
 </head>
 <script>
+    //Sun Sep 24 20:49:34 KST 2023
+    // Mon Sep 22 2023 12:47:32 GMT+0900 (한국 표준시)
+    function set2clock(el){
+        let yyyy = "20"+ el.substring(0,2)
+        let mm = el.substring(3,5)
+        let dd = el.substring(6,8)
+        let sysdate = new Date("Sun Sep")
+        console.log((sysdate));
+        let date = new Date(`${yyyy}-${mm}-${dd}`)
+        let day = parseInt((sysdate)/ (1000 * 60 * 60 * 24));
+        console.log(day);
+    }
+    
+    set2clock("22/09/25");
+
     function setClock (){
         let dateInfo = new Date();
         console.log(dateInfo);
@@ -15,8 +30,9 @@
         let sec = modifyNum(dateInfo.getSeconds());
 
         let year = modifyNum(dateInfo.getFullYear());
-        let month = modifyNum(dateInfo.getMonth());
+        let month = modifyNum(dateInfo.getMonth()+1);
         let date = modifyNum(dateInfo.getDate());
+        
         document.getElementById("time").innerHTML = `${hour} : ${min} : ${sec}`
         document.getElementById("date").innerHTML = `${year} 년 ${month} 월 ${date} 일`
     }

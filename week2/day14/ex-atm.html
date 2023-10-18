@@ -104,6 +104,14 @@
                 }
             }
             let now = new Date();
+            let day = Date.now();
+            console.log('now:', now)
+            console.log('day:', day);
+            let crt = `${now.getFullYear()}/${now.getMonth()}/${now.getDay()}`
+            console.log("crt:", crt); 
+
+
+            
             let current_dt = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
             let p = document.createElement("p");
             p.innerHTML = msg + current_dt;

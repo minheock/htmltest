@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script>
+        $(document).ready(function(){
+            // 네이버 이미지 검색
+            let naverSearchUrl = "https://openapi.naver.com/v1/search/image";
+            const CLIENT_ID = 'M6dlBYfbfEXlqDwlaaYH';
+            const CLIENT_SECRET = 'xyibANc90c';
+
+            $('#btn').click(function(){
+                let q = $('#search').val();
+                $.ajax({
+                    url: naverSearchUrl,
+                    type: "GET",
+                    data: {'query': q},
+                    headers: {
+                        'X-Naver-Client-Id': CLIENT_ID,
+                        'X-Naver-Client-Secret': CLIENT_SECRET,
+                    },
+                    success: function(res){
+                        console.log(res);
+                    },
+                    error: function(e){
+                        console.log(e);
+                    }                           
+                });
+            });
+        });
+
+
+        
+
+
+
+    </script>
+</head>
+<body>
+    <input type="text" id="search">
+    <button id="btn" type="button">검색</button>
+</body>
+</html>
+
