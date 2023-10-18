@@ -7,6 +7,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
 </head>
 <body>
+    <input type="text" id="input_data" placeholder="온도를 입력하세요">
+    <button onclick="fn_predict()">예측</button>
     <div id="output"></div>
     <script>
         //기온에 따른 판매량 예측
@@ -16,21 +18,48 @@
         let y = tf.tensor(판매량);
         x.print();
         // 모델 생성
+        //in
         let input = tf.input({shape:[1]});
-        let layer = tf.layers.dense({units:1}).apply(input);
+        // hidden layer
+        let hidden = tf.layers.dense({units:10, activation:'relu'}).apply(input);
+        let hidden2 = tf.layers.dense({units:10, activation:'relu'}).apply(hidden);
+        let hidden3 = tf.layers.dense({units:10, activation:'relu'}).apply(hidden2);
+        // out
+        let layer = tf.layers.dense({units:1}).apply(hidden3);
         let model = tf.model({inputs:input, outputs:layer});
         let compileParam = {optimizer : tf.train.adam()
-                            ,loss:tf.losses.meanSquareError};
+                            ,loss:tf.losses.meanSquaredError};
         model.compile(compileParam);
         // 모델학습
-        let fitParam = {epochs:100
+        let fitParam = {epochs:300
                         ,callbacks:{onEpochEnd: function(epoch, logs){
                             console.log('epoch:',epoch, logs);
                         }}}
-        model.fit(x,y,fitParam).then(function(){
-            let 예측결과 = model.predict(x);
-            예측결과.print();
-        })                                                  
+        // model.fit(x,y,fitParam).then(function(){
+        //     let 예측결과 = model.predict(x);
+        //     // 예측결과.print();
+        // });
+        async function train_predict(){
+            await model.fit(x,y, fitParam);
+            console.log("finish");
+             // test
+            let 다음주온도 = [18,20,17,15]                                             
+            let test_x = tf.tensor(다음주온도);
+            let 예측온도 = model.predict(test_x);
+            예측온도.print();
+        }
+        train_predict();
+        async function fn_predict(){
+            let data = document.getElementById("input_data").value;
+            let test_data = tf.tensor([data*1]);
+            let pred = model.predict(test_data);
+            let arr = await pred.array()
+            console.log(arr);
+            document.getElementById("output").innerText = arr[0];
+        }
+
+
+       
     </script>
 </body>
 </html>
