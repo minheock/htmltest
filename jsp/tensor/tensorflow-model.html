@@ -55,6 +55,7 @@
             let pred = model.predict(test_data);
             let arr = await pred.array()
             console.log(arr);
+            console.log(pred);
             document.getElementById("output").innerText = arr[0];
         }
 
